@@ -1,0 +1,7 @@
+**/gen
+**/target
+*~
+.*
+!.gitignore
+*.log
+resources/public/js/compiled
