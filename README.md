@@ -2,6 +2,7 @@ Reagent password field example
 ============================
 
 A simple react example implementing a password field component, inspired by this blog post: http://nilshartmann.net/posts/folien-mit-react-komponenten-entwicklen-talk-auf-der-w-jax-2015
+
 And this repository:
 https://github.com/nilshartmann/react-example-app
 
