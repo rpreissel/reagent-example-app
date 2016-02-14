@@ -8,7 +8,7 @@
 
 (defn password-form [restrictions on-password-set]
   (let [password (reagent/atom "")]
-    (fn [restrictions]
+    (fn [restrictions on-password-set]
       (let [checks (check-restrictions @password restrictions)
             failed-checks (reduce #(if (:checked %2) %1 (inc %1)) 0 checks)
             valid-password (= failed-checks 0)]

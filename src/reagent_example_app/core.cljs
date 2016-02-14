@@ -1,8 +1,6 @@
 (ns reagent-example-app.core
   (:require [reagent.core :as reagent]
-            [reagent-example-app.password :as pw]
-            [reagent-example-app.corecomponents :as cc]
-            [reagent-example-app.restrictions :as res]))
+            [reagent-example-app.password :as pw]))
 
 (enable-console-print!)
 
