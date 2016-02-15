@@ -53,7 +53,7 @@
 
      :reagent-render              ;; Note:  is not :render
      (fn []
-       [:div])}))                 ;; only a anchor for d3
+       [:div])}))                 ;; only an anchor for d3
 
 
 (defn chart-view []
