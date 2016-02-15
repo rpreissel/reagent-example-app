@@ -29,7 +29,7 @@
 
 (defn fetch-weather! [state]
   (let [city (:city @state)]
-    (GET (gstring/format "http://api.openweathermap.org/data/2.5/weather?q=%s,de&appid=%s&units=metric" city api-key)
+    (GET (gstring/format "https://api.openweathermap.org/data/2.5/weather?q=%s,de&appid=%s&units=metric" city api-key)
          {:handler (partial handle-server-response! state)
           :error-handler (partial handle-server-error! state)
           :response-format :json

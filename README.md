@@ -6,7 +6,7 @@ A simple react example implementing a password field component, inspired by this
 And this repository:
 https://github.com/nilshartmann/react-example-app
 
-[![Sample Application](screenshot.png)](https://rpreissel.github.io/reagent-example-app/)
+[![Sample Application](screenshot.png)](http://rpreissel.github.io/reagent-example-app/)
 
 Run
 ---
@@ -17,7 +17,7 @@ Run
 
 Running example
 ---------------
-* You can find a running example here: https://rpreissel.github.io/reagent-example-app/
+* You can find a running example here: http://rpreissel.github.io/reagent-example-app/
 
 
 Production build
