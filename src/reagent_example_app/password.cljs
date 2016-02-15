@@ -11,7 +11,7 @@
     (fn [restrictions on-password-set]
       (let [checks (check-restrictions @password restrictions)
             failed-checks (reduce #(if (:checked %2) %1 (inc %1)) 0 checks)
-            valid-password (= failed-checks 0)]
+            valid-password (zero? failed-checks)]
         [:div
          [cc/initial-focus-wrapper
           [:input {:type "password"
@@ -19,7 +19,7 @@
                    :placeholder "Password"
                    :onChange #(reset! password (-> % .-target .-value))}]]
          [cc/check-label-list checks]
-         (if (> failed-checks 0)
+         (if (pos? failed-checks)
            [:div.Label (str failed-checks " checks failed")]
            [:div.Label.Label-success "All checks passed"])
          [cc/button-bar

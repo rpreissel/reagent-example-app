@@ -5,12 +5,12 @@
 (def not-empty-string
   { :label "Enter at least one character."
     :validate (fn [value]
-                (and value (> (count value) 0)))})
+                (pos? (count value)))})
 
 (def at-least-eight-characters
   { :label "At least 8 characters long."
     :validate (fn [value]
-                (and value (>= (count value) 8)))})
+                (>= (count value) 8))})
 
 (def uppercase-letters
   { :label "Contains uppercase letters."
