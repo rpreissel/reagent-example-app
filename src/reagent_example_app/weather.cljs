@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent]
             [reagent-example-app.corecomponents :as cc]
             [goog.string :as gstring]
+            [goog.string.format :as gformat]
             [ajax.core :refer [GET]]))
 
 

@@ -2,14 +2,16 @@
   (:require [reagent.core :as reagent]
             [reagent-example-app.corecomponents :as cc]
             [reagent-example-app.password :as pw]
-            [reagent-example-app.weather :as we]))
+            [reagent-example-app.weather :as we]
+            [reagent-example-app.chart :as ch]))
 
 (enable-console-print!)
 
 (defn render-application-view [current-view-id]
   (case current-view-id
-    "passwordView" [pw/password-view]
-    "weatherView" [we/weather-view]
+    "passwordView"  [pw/password-view]
+    "weatherView"   [we/weather-view]
+    "chartView"     [ch/chart-view]
     [pw/password-view])
   )
 

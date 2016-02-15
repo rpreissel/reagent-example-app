@@ -9,7 +9,8 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.228"]
                  [reagent "0.5.1"]
-                 [cljs-ajax "0.5.3"]]
+                 [cljs-ajax "0.5.3"]
+                 [cljsjs/d3 "3.5.7-1"]]
 
   :plugins [[lein-figwheel "0.5.0-6"]
             [lein-cljsbuild "1.1.2" :exclusions [[org.clojure/clojure]]]]
