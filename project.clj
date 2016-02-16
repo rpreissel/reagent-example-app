@@ -8,7 +8,7 @@
 
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [org.clojure/clojurescript "1.7.228"]
-                 [reagent "0.5.1"]
+                 [reagent "0.6.0-alpha"]
                  [cljs-ajax "0.5.3"]
                  [cljsjs/d3 "3.5.7-1"]]
 
