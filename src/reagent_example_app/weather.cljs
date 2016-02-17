@@ -43,8 +43,8 @@
         [:div
          [:h1 "Current Weather"]
          [:input {:type "text" :focus true :value city
-                  :onChange #(swap! state assoc :city (-> % .-target .-value))}]
-         [cc/button "Load" :enabled (pos? (count city)) :on-click-handler #(fetch-weather! state)]
+                  :on-change #(swap! state assoc :city (-> % .-target .-value))}]
+         [cc/button "Load" :enabled (pos? (count city)) :on-click #(fetch-weather! state)]
          (when weather [weather-panel weather])
          (when error [:div.Red (str "Error: " error)])]))))
 

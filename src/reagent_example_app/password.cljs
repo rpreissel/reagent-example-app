@@ -17,13 +17,13 @@
           [:input {:type "password"
                    :value @password
                    :placeholder "Password"
-                   :onChange #(reset! password (-> % .-target .-value))}]]
+                   :on-change #(reset! password (-> % .-target .-value))}]]
          [cc/check-label-list checks]
          (if (pos? failed-checks)
            [:div.Label (str failed-checks " checks failed")]
            [:div.Label.Label-success "All checks passed"])
          [cc/button-bar
-          [cc/button "Set Password" :enabled valid-password :on-click-handler #(on-password-set @password)]]]))))
+          [cc/button "Set Password" :enabled valid-password :on-click #(on-password-set @password)]]]))))
 
 
 (defn password-view []

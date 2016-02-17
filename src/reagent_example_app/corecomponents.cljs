@@ -11,8 +11,8 @@
     [:div.CheckLabelList
      (map create-label checks)]))
 
-(defn button [label & {:keys [enabled on-click-handler] :or {enabled true} }]
-  [:button {:disabled (not enabled) :onClick (when enabled on-click-handler)} label])
+(defn button [label & {:keys [enabled on-click] :or {enabled true} }]
+  [:button {:disabled (not enabled) :on-click (when enabled on-click)} label])
 
 (defn button-bar [& children]
   (into [:div.ButtonBar] children))
@@ -20,21 +20,20 @@
 (defn message-dialog [message button-title on-ok-handler]
   [:div message
    [button-bar
-    [button button-title :on-click-handler on-ok-handler]]])
+    [button button-title :on-click on-ok-handler]]])
 
 
-(defn navigation-bar [active-view-id on-click-handler items]
+(defn navigation-bar [active-view-id on-click items]
   (let [create-item (fn [{:keys [view-id label]}]
                       [:li {:key view-id
                            :class (if (= view-id active-view-id)
                                     "NavigationBar-Item NavigationBar-Item-Active"
                                     "NavigationBar-Item")
-                           :onClick #(on-click-handler view-id)} label])]
+                           :on-click #(on-click view-id)} label])]
     [:ul.NavigationBar
      (map create-item items)]))
 
 (def initial-focus-wrapper
   (with-meta identity
     {:component-did-mount #(.focus (reagent/dom-node %))}))
-
 

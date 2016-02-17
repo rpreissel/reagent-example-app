@@ -7,7 +7,7 @@
 
 (defn render-drink-button [drink-selected-handler {:keys [name count]} ]
   ^{:key name}[cc/button (str name " " count)
-               :on-click-handler #(drink-selected-handler name)])
+               :on-click #(drink-selected-handler name)])
 
 (defn increment-drink-with-name [name drinks]
   (map #(if (= (:name %) name) (update % :count inc) (identity %)) drinks))
