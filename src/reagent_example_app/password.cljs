@@ -4,13 +4,13 @@
             [reagent-example-app.restrictions :as res]))
 
 (defn- check-restrictions [value restrictions]
-  (map #(identity {:label (:label %) :checked ((:validate %) value)}) restrictions))
+  (map #(% value) restrictions))
 
 (defn password-form [restrictions on-password-set]
   (let [password (reagent/atom "")]
     (fn [restrictions on-password-set]
-      (let [checks (check-restrictions @password restrictions)
-            failed-checks (reduce #(if (:checked %2) %1 (inc %1)) 0 checks)
+      (let [checks         (check-restrictions @password restrictions)
+            failed-checks  (count (filter (complement :checked) checks))
             valid-password (zero? failed-checks)]
         [:div
          [cc/initial-focus-wrapper
