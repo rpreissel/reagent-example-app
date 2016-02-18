@@ -10,14 +10,16 @@
                :on-click #(drink-selected-handler name)])
 
 (defn increment-drink-with-name [name drinks]
-  (map #(if (= (:name %) name) (update % :count inc) (identity %)) drinks))
+  (map #(if (= (:name %) name)
+          (update % :count inc)
+          (identity %)) drinks))
 
 (defn increment-drink-selected! [state name]
   (swap! state update :drinks (partial increment-drink-with-name name)))
 
 
 (defn render-chart [node drinks]
-  (let [count-all   (->> drinks (map :count) (reduce +))
+  (let [max-count   (->> drinks (map :count) (reduce max))
         data        (.. js/d3
                         (select node)
                         (selectAll "div")
@@ -30,7 +32,7 @@
         (style "padding" "10px")
         (style "background-color" "#B6B6B6"))
     (.. data
-        (style "width" #(str (* (.-count %) (/ 100 count-all)) "%"))
+        (style "width" #(str (* (.-count %) (/ 100 max-count)) "%"))
         (text #(.-name %)))
     (.. data
         (exit)
