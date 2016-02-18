@@ -17,7 +17,7 @@
        [:h1 (str "Weather in " (:name weather))]
        [:h2 (str (get-in weather [:main :temp] " °C"))
         [:img {:src (str "http://openweathermap.org/img/w/" (:icon current-weather) ".png")}]]
-       [:p (weather (:description current-weather))]])))
+       [:p (:description current-weather)]])))
 
 
 (defn handle-server-response! [state response]
