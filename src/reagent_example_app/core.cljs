@@ -7,27 +7,23 @@
 
 (enable-console-print!)
 
-(defn render-application-view [current-view-id]
-  (case current-view-id
-    "passwordView"  [pw/password-view]
-    "weatherView"   [we/weather-view]
-    "chartView"     [ch/chart-view]
-    [pw/password-view])
-  )
+(def views
+  ["Password Form"  [pw/password-view]
+   "Weather Report" [we/weather-view]
+   "Chart Example"  ^{:class "ApplicationView-chartView"}[ch/chart-view]])
+
 
 (defn application []
-  (let [current-view-id (reagent/atom "passwordView")]
+  (let [current-view (reagent/atom (views 1))]
     (fn []
-      (let [application-view-class-names (str "ApplicationView ApplicationView-" @current-view-id)]
+      (let [ view @current-view
+             application-view-class-names (str "ApplicationView " (-> view meta :class))]
         [:div
-         [cc/navigation-bar @current-view-id #(reset! current-view-id %)
-          [{:label "Password Form" :view-id "passwordView"}
-           {:label "Weather Report" :view-id "weatherView"}
-           {:label "Chart Example" :view-id "chartView"}]]
-         [:div {:class application-view-class-names}
-          (render-application-view @current-view-id)]]))))
+         [cc/navigation-bar views view #(reset! current-view %)]
+         [:div {:class application-view-class-names} view]]))))
 
 
 (reagent/render-component [application]
                           (. js/document (getElementById "app")))
+
 
