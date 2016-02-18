@@ -27,11 +27,11 @@
   (re-find (re-pattern "[!\"#$%&\\'()*+,-./:;<=>?@_`|~]") value))
 
 
-(def default-restrictions [
+(def default-restrictions (juxt
                             ;;not-empty-string
                             at-least-eight-characters
                             uppercase-letters
                             lowercase-letters
                             numbers
-                            punctuation])
+                            punctuation))
 
