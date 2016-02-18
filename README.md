@@ -8,6 +8,11 @@ https://github.com/nilshartmann/react-example-app
 
 [![Sample Application](screenshot.png)](http://rpreissel.github.io/reagent-example-app/)
 
+Idiomatic Clojure
+-----------------
+You will find a more idiomatic clojure variant of this example in the "idiomatic"-Branch.
+The "master"-Branch is intentionally nearby the JavaScript version.
+
 Run
 ---
 * clone the git repository
@@ -18,6 +23,7 @@ Run
 Running example
 ---------------
 * You can find a running example here: http://rpreissel.github.io/reagent-example-app/
+
 
 
 Production build
