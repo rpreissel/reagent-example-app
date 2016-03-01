@@ -6,15 +6,15 @@
 (defn password-form [restrictions on-password-set]
   (let [password (reagent/atom "")]
     (fn [restrictions on-password-set]
-      (let [checks         (restrictions @password)
-            failed-checks  (count (remove :checked checks))
+      (let [checks (restrictions @password)
+            failed-checks (count (remove :checked checks))
             valid-password (zero? failed-checks)]
         [:div
          [cc/initial-focus-wrapper
-          [:input {:type "password"
-                   :value @password
+          [:input {:type        "password"
+                   :value       @password
                    :placeholder "Password"
-                   :on-change #(reset! password (-> % .-target .-value))}]]
+                   :on-change   #(reset! password (-> % .-target .-value))}]]
          [cc/check-label-list checks]
          (if (pos? failed-checks)
            [:div.Label (str failed-checks " checks failed")]

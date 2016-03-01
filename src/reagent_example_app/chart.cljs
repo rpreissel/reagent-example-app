@@ -5,25 +5,22 @@
 
 
 
-(defn render-drink-button [drink-selected-handler {:keys [name count]} ]
-  ^{:key name}[cc/button (str name " " count)
-               :on-click #(drink-selected-handler name)])
 
 (defn increment-drink-with-name [name drinks]
   (map #(if (= (:name %) name)
-          (update % :count inc)
-          (identity %)) drinks))
+         (update % :count inc)
+         (identity %)) drinks))
 
 (defn increment-drink-selected! [state name]
   (swap! state update :drinks (partial increment-drink-with-name name)))
 
 
 (defn render-chart [node drinks]
-  (let [max-count   (->> drinks (map :count) (reduce max))
-        data        (.. js/d3
-                        (select node)
-                        (selectAll "div")
-                        (data (clj->js drinks)))]
+  (let [max-count (->> drinks (map :count) (reduce max))
+        data (.. js/d3
+                 (select node)
+                 (selectAll "div")
+                 (data (clj->js drinks)))]
     (.. data
         (enter)
         (append "div")
@@ -41,22 +38,21 @@
 (defn chart-panel [drinks]
   (reagent/create-class
     {:component-did-mount
-     (fn [this]
-       (let [node (reagent/dom-node this)]
-         (render-chart node drinks)))
+                   (fn [this]
+                     (let [node (reagent/dom-node this)]
+                       (render-chart node drinks)))
 
      :component-did-update
-     (fn [this]
-       (let [node (reagent/dom-node this)]
-         (let [[_ current-drinks] (reagent/argv this)] ;; we have to get the current data from argv
-           (render-chart node current-drinks))))
+                   (fn [this]
+                     (let [node (reagent/dom-node this)]
+                       (let [[_ current-drinks] (reagent/argv this)] ;; we have to get the current data from argv
+                         (render-chart node current-drinks))))
 
-     :display-name  "chart-panel"  ;; for more helpful warnings & errors
+     :display-name "chart-panel"                            ;; for more helpful warnings & errors
 
-     :reagent-render              ;; Note:  is not :render
-     (fn []
-       [:div])}))                 ;; only an anchor for d3
-
+     :reagent-render                                        ;; Note:  is not :render
+                   (fn []
+                     [:div])}))                             ;; only an anchor for d3
 
 (defn chart-view []
   (let [state (reagent/atom {:drinks [{:name "Cola" :count 5}
@@ -68,5 +64,7 @@
        [:h1 "Chart generator"]
        [chart-panel (:drinks @state)]
        [cc/button-bar
-        (map (partial render-drink-button #(increment-drink-selected! state %))  (:drinks @state))]])))
+        (for [{:keys [name count]} (:drinks @state)]
+          ^{:key name} [cc/button (str name " " count)
+                        :on-click #(increment-drink-selected! state name)])]])))
 

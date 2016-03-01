@@ -8,16 +8,16 @@
 (enable-console-print!)
 
 (def views
-  ["Password Form"  [pw/password-view]
+  ["Password Form" [pw/password-view]
    "Weather Report" [we/weather-view]
-   "Chart Example"  ^{:class "ApplicationView-chartView"}[ch/chart-view]])
+   "Chart Example" ^{:class "ApplicationView-chartView"} [ch/chart-view]])
 
 
 (defn application []
   (let [current-view (reagent/atom (views 1))]
     (fn []
-      (let [ view @current-view
-             application-view-class-names (str "ApplicationView " (-> view meta :class))]
+      (let [view @current-view
+            application-view-class-names (str "ApplicationView " (-> view meta :class))]
         [:div
          [cc/navigation-bar views view #(reset! current-view %)]
          [:div {:class application-view-class-names} view]]))))

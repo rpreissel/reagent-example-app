@@ -21,7 +21,6 @@
 
 
 (defn handle-server-response! [state response]
-  (println response)
   (swap! state assoc :weather response :error nil))
 
 (defn handle-server-error! [state {:keys [status status-text]}]
@@ -30,10 +29,10 @@
 (defn fetch-weather! [state]
   (let [city (:city @state)]
     (GET (gstring/format "http://api.openweathermap.org/data/2.5/weather?q=%s,de&appid=%s&units=metric" city api-key)
-         {:handler (partial handle-server-response! state)
-          :error-handler (partial handle-server-error! state)
+         {:handler         (partial handle-server-response! state)
+          :error-handler   (partial handle-server-error! state)
           :response-format :json
-          :keywords? true})))
+          :keywords?       true})))
 
 (defn weather-view [& {:keys [initial-city] :or {initial-city "Hamburg"}}]
   (let [state (reagent/atom {:city initial-city})]
@@ -42,7 +41,7 @@
       (let [{:keys [city weather error]} @state]
         [:div
          [:h1 "Current Weather"]
-         [:input {:type "text" :focus true :value city
+         [:input {:type      "text" :focus true :value city
                   :on-change #(swap! state assoc :city (-> % .-target .-value))}]
          [cc/button "Load" :enabled (pos? (count city)) :on-click #(fetch-weather! state)]
          (when weather [weather-panel weather])
